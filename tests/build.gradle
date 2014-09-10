@@ -1,0 +1,24 @@
+apply plugin: 'java'
+
+dependencies {
+    def androidModule = project(':app')
+    compile androidModule
+
+    testCompile androidModule.android.libraryVariants.toList().first().javaCompile.classpath
+    testCompile androidModule.android.libraryVariants.toList().first().javaCompile.outputs.files
+    testCompile files(androidModule.plugins.findPlugin("com.android.library").getBootClasspath())
+
+    testCompile 'junit:junit:4.+'
+    testCompile 'org.hamcrest:hamcrest-all:1.3'
+
+
+    testCompile ('org.robolectric:robolectric:2.2')
+    testCompile ('com.squareup.okhttp:mockwebserver:2.0.0')
+
+}
+tasks.withType(Test) {
+    scanForTestClasses = false
+    include "**/*Should.class"
+    include "**/*Test.class"
+    include "**/*Tests.class"
+}

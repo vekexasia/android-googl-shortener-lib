@@ -9,7 +9,7 @@ This library can be found in maven central repo. If you're using Android studio 
 ```groovy
 dependencies {
 	// ...
-	compile 'com.andreabaccega:googlshortenerlibrary:1.0.0'
+	compile 'com.andreabaccega:googlshortenerlib:1.0.0'
 	// ...
 }
 ```
@@ -18,8 +18,8 @@ dependencies {
 ```xml
 		<dependency>
 			<groupId>com.andreabaccega</groupId>
-			<artifactId>googlshortenerlibrary</artifactId>
-			<version>${com.andreabaccega.android-form-edittext-version}</version>
+			<artifactId>googlshortenerlib</artifactId>
+			<version>${version}</version>
 			<type>aar</type>
 			<scope>provided</scope>
 		</dependency>
@@ -73,7 +73,7 @@ They're automatically resolved by gradle but you can always exclude them (if you
 ```groovy
 dependencies {
 	// ...
-	compile ('com.andreabaccega:googlshortenerlibrary:1.0.0') {
+	compile ('com.andreabaccega:googlshortenerlib:1.0.0') {
 		exclude module: 'okhttp'
 		exclude module: 'gson'
 	}

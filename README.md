@@ -9,7 +9,7 @@ This library can be found in maven central repo. If you're using Android studio 
 ```groovy
 dependencies {
 	// ...
-	compile 'com.andreabaccega:googlshortenerlibrary:1.0.0@aar'
+	compile 'com.andreabaccega:googlshortenerlibrary:1.0.0'
 	// ...
 }
 ```
@@ -62,9 +62,25 @@ We do recommend to [request an apiKey](https://developers.google.com/url-shorten
 				apiKey)
 		)
 ```
+# Dependencies
+
+This library depends on the following artifacts:
+*  com.squareup.okhttp:okhttp:2.0.0
+*  com.google.code.gson:gson:2.3
+
+They're automatically resolved by gradle but you can always exclude them (if you're using another compatible version) by doing so:
+
+```groovy
+dependencies {
+	// ...
+	compile ('com.andreabaccega:googlshortenerlibrary:1.0.0') {
+		exclude module: 'okhttp'
+		exclude module: 'gson'
+	}
+	// ...
+}
 
 # Author
 
 *  Andrea Baccega <me@andreabaccega.com> - _Author/Ideator of the library_
 
-# Contributors

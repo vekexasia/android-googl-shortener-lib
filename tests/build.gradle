@@ -6,8 +6,8 @@ dependencies {
 
     testCompile androidModule.android.libraryVariants.toList().first().javaCompile.classpath
     testCompile androidModule.android.libraryVariants.toList().first().javaCompile.outputs.files
-    testCompile files(androidModule.plugins.findPlugin("com.android.library").getBootClasspath())
-
+    print (androidModule.plugins.findPlugin("com.android.library"))
+    //testCompile files(androidModule.plugins.findPlugin("com.android.library")[0].getBootClasspath())
     testCompile 'junit:junit:4.+'
     testCompile 'org.hamcrest:hamcrest-all:1.3'
 

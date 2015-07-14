@@ -1,19 +1,18 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 20
-    buildToolsVersion "20.0.0"
+    compileSdkVersion 21
+    buildToolsVersion "23.0.0 rc3"
 
     defaultConfig {
-        applicationId "com.andreabaccega.googlshortenerlib"
-        minSdkVersion 15
-        targetSdkVersion 20
-        versionCode 1
-        versionName "1.0.0"
+        minSdkVersion 4
+        targetSdkVersion 21
+        versionCode 2
+        versionName "1.0.1"
     }
     buildTypes {
         release {
-            runProguard false
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -21,9 +20,35 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.squareup.okhttp:okhttp:2.0.0'
-    compile 'com.google.code.gson:gson:2.3'
+    compile 'com.squareup.okhttp:okhttp:2.4.0'
+    compile 'com.google.code.gson:gson:2.3.1'
 }
 
 
-apply from: 'https://raw.github.com/chrisbanes/gradle-mvn-push/master/gradle-mvn-push.gradle'
+//apply from: 'https://raw.github.com/chrisbanes/gradle-mvn-push/master/gradle-mvn-push.gradle'
+
+
+apply plugin: 'maven'
+
+group = "com.andreabaccega"
+version = android.defaultConfig.versionName
+archivesBaseName = "googlshortenerlib"
+afterEvaluate { project ->
+    uploadArchives {
+        repositories.mavenDeployer {
+            repository url: 'file://' + new File(System.getProperty('user.home'), '.m2/localRepo').absolutePath
+        }
+    }
+    task androidSourcesJar(type: Jar) {
+        classifier = 'sources'
+
+        from android.sourceSets.main.java.source
+    }
+
+    artifacts {
+        //archives packageReleaseJar
+        archives androidSourcesJar
+    }
+
+}
+task install(dependsOn: uploadArchives)
